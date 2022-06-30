@@ -7,6 +7,9 @@ import type { ReleaseType } from 'semver'
 import semver from 'semver'
 import prompts from 'prompts'
 import cac from "cac"
+import { createRequire } from "module"
+
+const _require = createRequire(import.meta.url)
 
 interface ReleaseOptions {
   monorepo?: boolean
@@ -18,11 +21,11 @@ interface ReleaseOptions {
 type ResolvedReleaseOptions = Required<ReleaseOptions>
 
 const cli = cac('release')
-const root = import.meta.url
+const root = path.join(path.basename(import.meta.url), "../")
 
 function getMemoRepoPackages(root: string) {
   return readdirSync(path.resolve(root, './packages/')).filter((pkgPath) => {
-    const pkg: { private?: boolean } = require(path.resolve(
+    const pkg: { private?: boolean } = _require(path.resolve(
       root,
       './packages/',
       pkgPath,
@@ -42,7 +45,7 @@ function getPackageInfo(pkgName: string, pkgDir: string) {
     name: string
     version: string
     private?: boolean
-  } = require(pkgPath)
+  } = _require(pkgPath)
   const currentVersion = pkg.version
 
   return {
