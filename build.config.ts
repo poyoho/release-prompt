@@ -4,7 +4,5 @@ export default defineBuildConfig({
   entries: [
     'src/index',
   ],
-  clean: true,
-  rollup: {
-  },
+  clean: true
 })

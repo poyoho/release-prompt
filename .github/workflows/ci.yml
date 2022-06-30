@@ -14,43 +14,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    timeout-minutes: 10
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node_version: [14, 16]
-      fail-fast: false
-
-    name: "Test: node-${{ matrix.node_version }}, ${{ matrix.os }}"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 6
-
-      - name: Set node version to ${{ matrix.node_version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node_version }}
-          cache: "pnpm"
-
-      - name: Install deps
-        run: pnpm install
-
-      - name: Build
-        run: pnpm run build
-
-      - name: Test
-        run: pnpm run test
-
-      - name: Test coverage
-        run: pnpm run test:coverage
-
   lint:
     timeout-minutes: 10
     runs-on: ubuntu-latest
@@ -72,7 +35,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install deps
-        run: pnpm install
+        run: pnpm ci
 
       - name: Check formatting
         run: pnpm prettier --check .

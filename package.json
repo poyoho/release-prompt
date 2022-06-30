@@ -18,10 +18,12 @@
   ],
   "bin": "./dist/index.mjs",
   "scripts": {
+    "ci": "pnpm i --frozen-lockfile",
     "release": "esno ./src/index.ts",
     "build": "unbuild",
     "dev": "unbuild --stub",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "ci-publish": "esno ./src/index.ts publish"
   },
   "devDependencies": {
     "@types/minimist": "^1.2.2",

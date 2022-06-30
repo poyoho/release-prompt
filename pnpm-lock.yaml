@@ -17,13 +17,11 @@ specifiers:
   typescript: ^4.6.2
   unbuild: ^0.7.4
 
-dependencies:
-  cac: 6.7.12
-
 devDependencies:
   '@types/minimist': 1.2.2
   '@types/prompts': 2.0.14
   '@types/semver': 7.3.9
+  cac: 6.7.12
   esno: 0.16.3
   execa: 5.1.1
   lint-staged: 12.3.7
@@ -525,7 +523,7 @@ packages:
   /cac/6.7.12:
     resolution: {integrity: sha512-rM7E2ygtMkJqD9c7WnFU6fruFcN3xe4FM5yUmgxhZzIKJk4uHl9U/fhwdajGFQbQuv43FAUo1Fe8gX/oIKDeSA==}
     engines: {node: '>=8'}
-    dev: false
+    dev: true
 
   /caniuse-lite/1.0.30001361:
     resolution: {integrity: sha512-ybhCrjNtkFji1/Wto6SSJKkWk6kZgVQsDq5QI83SafsF6FXv2JB4df9eEdH6g8sdGgqTXrFLjAxqBGgYoU3azQ==}
