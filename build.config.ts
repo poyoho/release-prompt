@@ -1,8 +1,6 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-  entries: [
-    'src/index',
-  ],
+  entries: ['src/index'],
   clean: true
 })

@@ -6,8 +6,8 @@ import path from 'path'
 import type { ReleaseType } from 'semver'
 import semver from 'semver'
 import prompts from 'prompts'
-import cac from "cac"
-import { createRequire } from "module"
+import cac from 'cac'
+import { createRequire } from 'module'
 
 const _require = createRequire(import.meta.url)
 
@@ -21,16 +21,13 @@ interface ReleaseOptions {
 type ResolvedReleaseOptions = Required<ReleaseOptions>
 
 const cli = cac('release')
-const root = path.join(path.basename(import.meta.url), "../")
+const root = path.join(path.basename(import.meta.url), '../')
 
 function getMemoRepoPackages(root: string) {
   return readdirSync(path.resolve(root, './packages/')).filter((pkgPath) => {
-    const pkg: { private?: boolean } = _require(path.resolve(
-      root,
-      './packages/',
-      pkgPath,
-      'package.json'
-    ))
+    const pkg: { private?: boolean } = _require(
+      path.resolve(root, './packages/', pkgPath, 'package.json')
+    )
     return !pkg.private
   })
 }
@@ -317,7 +314,7 @@ async function publishCI(tag: string, config: ResolvedReleaseOptions) {
   )
 }
 
-function resolveOptions(raw: ReleaseOptions ): ResolvedReleaseOptions {
+function resolveOptions(raw: ReleaseOptions): ResolvedReleaseOptions {
   return {
     monorepo: raw.monorepo ?? false,
     dry: raw.dry || false,
