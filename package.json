@@ -7,7 +7,7 @@
   "main": "dist/release-prompt.es.js",
   "module": "dist/release-prompt.es.js",
   "types": "dist/types/index.d.ts",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "repository": {
     "type": "git",
     "url": "https://github.com/poyoho/storage-hook"
@@ -16,7 +16,9 @@
     "release",
     "cli"
   ],
-  "bin": "./dist/index.mjs",
+  "bin": {
+    "release": "dist/index.mjs"
+  },
   "scripts": {
     "ci": "pnpm i --frozen-lockfile",
     "release": "esno ./src/index.ts",
