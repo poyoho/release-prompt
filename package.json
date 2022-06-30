@@ -16,6 +16,7 @@
     "release",
     "cli"
   ],
+  "bin": "./dist/index.mjs",
   "scripts": {
     "release": "esno ./src/index.ts",
     "build": "unbuild",
@@ -26,6 +27,7 @@
     "@types/minimist": "^1.2.2",
     "@types/prompts": "^2.0.14",
     "@types/semver": "^7.3.9",
+    "cac": "^6.7.12",
     "esno": "^0.16.3",
     "execa": "^5.1.1",
     "lint-staged": "^12.3.3",
@@ -49,8 +51,5 @@
   "files": [
     "dist",
     "lib"
-  ],
-  "dependencies": {
-    "cac": "^6.7.12"
-  }
+  ]
 }
