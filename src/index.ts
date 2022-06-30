@@ -197,13 +197,17 @@ async function releaseMemoRepo(config: ResolvedReleaseOptions): Promise<void> {
     pkg = input.pkg
     pkgDir = path.resolve(root, './packages/', pkg)
   } else {
-    const input: { pkg: string } = await prompts({
-      type: 'select',
-      name: 'pkg',
-      message: 'Select package',
-      choices: config.package.map((i) => ({ value: i, title: i }))
-    })
-    pkg = input.pkg
+    if (config.package.length === 1) {
+      pkg = config.package.pop()
+    } else {
+      const input: { pkg: string } = await prompts({
+        type: 'select',
+        name: 'pkg',
+        message: 'Select package',
+        choices: config.package.map((i) => ({ value: i, title: i }))
+      })
+      pkg = input.pkg
+    }
     pkgDir = path.resolve(root)
   }
 
@@ -238,7 +242,8 @@ async function releaseMemoRepo(config: ResolvedReleaseOptions): Promise<void> {
     throw new Error(`invalid target version: ${targetVersion}`)
   }
 
-  const tag = pkgName === 'all' ? `v${targetVersion}` : `${pkgName}@${targetVersion}`
+  const tag =
+    pkgName === 'base' ? `v${targetVersion}` : `${pkgName}@${targetVersion}`
 
   const { yes }: { yes: boolean } = await prompts({
     type: 'confirm',
@@ -294,9 +299,14 @@ async function releaseMemoRepo(config: ResolvedReleaseOptions): Promise<void> {
 }
 
 async function publishCI(tag: string, config: ResolvedReleaseOptions) {
-  let [pkgName, version] = tag.split('@', 2)
+  let version = '',
+    pkgName = ''
+  if (tag.startsWith('v')) {
+    version = tag.slice(1)
+  } else {
+    ;[pkgName, version] = tag.split('@', 2)
+  }
 
-  if (version.startsWith('v')) version = version.slice(1)
   const pkgDir = config.monorepo
     ? path.resolve(root, 'packages', pkgName)
     : path.resolve(root)
@@ -322,7 +332,7 @@ function resolveOptions(raw: ReleaseOptions): ResolvedReleaseOptions {
     package: (typeof raw.package === 'string'
       ? [raw.package]
       : raw.package || []
-    ).concat(['all'])
+    ).concat(['base'])
   }
 }
 
