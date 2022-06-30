@@ -238,7 +238,7 @@ async function releaseMemoRepo(config: ResolvedReleaseOptions): Promise<void> {
     throw new Error(`invalid target version: ${targetVersion}`)
   }
 
-  const tag = `${pkgName}@${targetVersion}`
+  const tag = pkgName === 'all' ? `v${targetVersion}` : `${pkgName}@${targetVersion}`
 
   const { yes }: { yes: boolean } = await prompts({
     type: 'confirm',

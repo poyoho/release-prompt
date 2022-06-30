@@ -7,7 +7,7 @@
   "main": "dist/release-prompt.es.js",
   "module": "dist/release-prompt.es.js",
   "types": "dist/types/index.d.ts",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "repository": {
     "type": "git",
     "url": "https://github.com/poyoho/storage-hook"
