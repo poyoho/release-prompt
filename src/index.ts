@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import colors from 'picocolors'
 import type { Options as ExecaOptions } from 'execa'
 import execa from 'execa'
